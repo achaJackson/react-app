@@ -1,0 +1,35 @@
+version: '3'
+services:
+
+  web:
+    #image: node:alpine
+    container_name: webapp
+    labels:
+      - version=1.0
+      - author = achajackson
+      - email = achajackson@gmail.com
+
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - /app/node_modules
+      - .:/app
+    restart: always
+
+ #container to run the tests in the containers
+ #this re-runs the tests on-changes to the test.js file  
+  tests:
+    container_name: test_container
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+#attack volumes to track changes to files in the container
+    volumes:
+      - /app/node_modules
+      - .:/app
+
+    command: ["npm" , "run", "test"]
+    restart: always
