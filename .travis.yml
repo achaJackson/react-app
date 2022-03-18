@@ -11,5 +11,24 @@ before_install:
 #in this automated process
   - docker build -t achajackson/react-app -f Dockerfile.dev .
 
+#after pulling the code from git, travis will run testing
 script: 
   - docker run achajackson/react-app npm run test -- --coverage
+
+#tell travis what to do after a successful test
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  app: "react-app"
+  env: "Reactapp-env"
+  bucket_name: "elasticbeanstalk-us-east-1-236638675154"
+  bucket_path: "react-app"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: "$AWS_SECRET_KEY"
+
+
+
+
