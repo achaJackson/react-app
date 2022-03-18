@@ -1,0 +1,15 @@
+#require sudo permission to use docker
+sudo: required
+
+#call the service you want to use
+services:
+  - docker
+
+#do some things before you install
+before_install: 
+# tag the image since we wont be able to get the imageID
+#in this automated process
+  - docker build -t achajackson/react-app -f Dockerfile.dev .
+
+script: 
+  - docker run achajackson/react-app npm run test -- --coverage

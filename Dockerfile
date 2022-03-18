@@ -1,5 +1,6 @@
 #multistep process to run our app
 #crating a build phase to bundle our app
+#production dockerfile
 
 FROM node:alpine as builder
 
