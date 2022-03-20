@@ -18,7 +18,6 @@ script:
 #tell travis what to do after a successful test
 deploy:
   provider: elasticbeanstalk
-  edge: true
   region: "us-east-1"
   app: "react-app"
   env: "Reactapp-env"
