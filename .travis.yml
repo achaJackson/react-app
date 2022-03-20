@@ -18,6 +18,7 @@ script:
 #tell travis what to do after a successful test
 deploy:
   provider: elasticbeanstalk
+  edge: true
   region: "us-east-1"
   app: "react-app"
   env: "Reactapp-env"
@@ -25,8 +26,7 @@ deploy:
   bucket_path: "react-app"
   on:
     branch: master
-  access_key_id: 
-    secure: $AWS_ACCESS_KEY_ID
+  access_key_id: $AWS_ACCESS_KEY
   secret_access_key: 
     secure: $AWS_SECRET_KEY
 
