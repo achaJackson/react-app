@@ -1,3 +1,4 @@
+language: generic
 #require sudo permission to use docker
 sudo: required
 
@@ -13,7 +14,8 @@ before_install:
 
 #after pulling the code from git, travis will run testing
 script: 
-  - docker run achajackson/react-app npm run test -- --coverage
+  - docker run -e CI=true achajackson/react-app npm run test
+#  - docker run achajackson/react-app npm run test -- --coverage
 
 #tell travis what to do after a successful test
 deploy:
