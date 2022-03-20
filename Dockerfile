@@ -24,6 +24,8 @@ FROM nginx
 
 #ARG app_dest = "/usr/share/nginx/html"
 
+EXPOSE 80
+
 #copy only the bundled app into the nginx server
 COPY --from=builder /app/build /usr/share/nginx/html
 
