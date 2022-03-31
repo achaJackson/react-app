@@ -1,36 +1,28 @@
 language: generic
-#require sudo permission to use docker
+
 sudo: required
 
-#call the service you want to use
 services:
   - docker
 
-#do some things before you install
 before_install: 
-# tag the image since we wont be able to get the imageID
-#in this automated process
   - docker build -t achajackson/react-app -f Dockerfile.dev .
 
-#after pulling the code from git, travis will run testing
 script: 
   - docker run -e CI=true achajackson/react-app npm run test
-#  - docker run achajackson/react-app npm run test -- --coverage
 
-#tell travis what to do after a successful test
+#deply to AWS EBS after test pass with Travis
 deploy:
   provider: elasticbeanstalk
   region: "us-east-1"
   app: "react-app"
   env: "Reactapp-env"
   bucket_name: "elasticbeanstalk-us-east-1-236638675154"
-  bucket_path: "react-app"
+  bucket_path: "reactapp-app"
   on:
-    branch: master
+    branch: masters
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: "$AWS_SECRET_KEY"
   skip_cleanup: true
-
-
 
 

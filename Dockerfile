@@ -14,12 +14,11 @@ RUN npm install
 #copy all files to the container /dir
 COPY ./ ./
 
-#build the app, returns a /build bundled app
+#build the app, returns a /build bundled app (artifact)
 RUN npm run build
 
 #This phase will run the app in production with Nginx server
-
-#pull the nginx server from dockerhub
+#pull the nginx server from dockerhubs
 FROM nginx
 
 #ARG app_dest = "/usr/share/nginx/html"
